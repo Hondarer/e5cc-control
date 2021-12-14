@@ -18,7 +18,7 @@ namespace protocolTest
 
             serialPort.Open();
 
-            EchobackTestCommand echobackTestCommand = new EchobackTestCommand() { SlaveAddress=0x01, TestData = 0x1234 };
+            EchobackTestCommand echobackTestCommand = new EchobackTestCommand();
             serialPort.Write(echobackTestCommand.Bytes, 0, echobackTestCommand.Bytes.Length);
 
             while (serialPort.BytesToRead < 8)

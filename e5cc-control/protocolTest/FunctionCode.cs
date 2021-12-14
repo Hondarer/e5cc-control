@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace protocolTest
+﻿namespace protocolTest
 {
     public enum FunctionCode : Byte
     {
@@ -12,6 +6,7 @@ namespace protocolTest
         WriteVariableMultiple = 0x16,
         WriteVariableSingleOrOperationCommand = 0x06,
         EchobackTest = 0x08,
+
         ErrorResponseReadVariableMultiple = 0x83,
         ErrorResponseWriteVariableMultiple = 0x90,
         ErrorResponseWriteVariableSingleOrOperationCommand = 0x86,

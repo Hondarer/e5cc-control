@@ -8,7 +8,7 @@ namespace protocolTest
 {
     public abstract class FormatBase
     {
-        public byte SlaveAddress { get; set; }
+        public byte SlaveAddress { get; set; } = 0x01;
 
         public FunctionCode FunctionCode { get; protected set; }
 

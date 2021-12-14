@@ -2,7 +2,7 @@
 {
     public class EchobackTestCommand : CommandBase
     {
-        public ushort TestData { get; set; } = 0x0000;
+        public ushort TestData { get; set; } = 0x1234;
 
         public EchobackTestCommand()
         {
