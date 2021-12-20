@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "protocolTest", "protocolTest\protocolTest.csproj", "{F2BA3E67-46E7-41E0-9F6E-ADFF318977BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "protocolTest", "protocolTest\protocolTest.csproj", "{F2BA3E67-46E7-41E0-9F6E-ADFF318977BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "e5ccControlPanel", "e5ccControlPanel\e5ccControlPanel.csproj", "{D31DAA4C-22A2-4560-B6D5-63EF183EB87E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libE5cc", "libE5cc\libE5cc.csproj", "{87B92C31-A489-4577-B2E9-F552E8115F26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{F2BA3E67-46E7-41E0-9F6E-ADFF318977BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2BA3E67-46E7-41E0-9F6E-ADFF318977BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2BA3E67-46E7-41E0-9F6E-ADFF318977BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D31DAA4C-22A2-4560-B6D5-63EF183EB87E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D31DAA4C-22A2-4560-B6D5-63EF183EB87E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D31DAA4C-22A2-4560-B6D5-63EF183EB87E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D31DAA4C-22A2-4560-B6D5-63EF183EB87E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87B92C31-A489-4577-B2E9-F552E8115F26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87B92C31-A489-4577-B2E9-F552E8115F26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87B92C31-A489-4577-B2E9-F552E8115F26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87B92C31-A489-4577-B2E9-F552E8115F26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

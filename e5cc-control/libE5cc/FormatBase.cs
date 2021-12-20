@@ -4,15 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace protocolTest
+namespace libE5cc
 {
     public abstract class FormatBase
     {
         public byte SlaveAddress { get; set; } = 0x01;
 
         public FunctionCode FunctionCode { get; protected set; }
-
-        public abstract byte[] Bytes { get; set; }
 
         protected byte[] CalculateCRC(byte[] buffer)
         {

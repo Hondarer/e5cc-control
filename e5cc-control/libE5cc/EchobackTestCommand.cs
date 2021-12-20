@@ -1,4 +1,7 @@
-﻿namespace protocolTest
+﻿using System;
+using System.Linq;
+
+namespace libE5cc
 {
     public class EchobackTestCommand : CommandBase
     {
@@ -17,7 +20,6 @@
                 bytes = bytes.Concat(BitConverter.GetBytes(TestData).Reverse()).ToArray();
                 return bytes.Concat(CalculateCRC(bytes)).ToArray();
             }
-            set => throw new InvalidOperationException();
         }
     }
 }

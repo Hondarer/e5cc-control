@@ -1,4 +1,4 @@
-﻿namespace protocolTest
+﻿namespace libE5cc
 {
     public class OperationCommand : WriteVariableSingleCommand
     {

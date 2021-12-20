@@ -1,6 +1,6 @@
-﻿namespace protocolTest
+﻿namespace libE5cc
 {
-    public enum FunctionCode : Byte
+    public enum FunctionCode : byte
     {
         ReadVariableMultiple = 0x03,
         WriteVariableMultiple = 0x16,

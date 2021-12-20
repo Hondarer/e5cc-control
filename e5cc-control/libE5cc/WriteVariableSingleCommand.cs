@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace protocolTest
+namespace libE5cc
 {
     public class WriteVariableSingleCommand : CommandBase
     {
@@ -26,7 +23,6 @@ namespace protocolTest
                               Concat(BitConverter.GetBytes(WriteData).Reverse()).ToArray();
                 return bytes.Concat(CalculateCRC(bytes)).ToArray();
             }
-            set => throw new InvalidOperationException();
         }
     }
 }
