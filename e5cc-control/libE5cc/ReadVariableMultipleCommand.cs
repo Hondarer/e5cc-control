@@ -18,14 +18,20 @@ namespace libE5cc
         {
             get
             {
-                byte[] bytes = new byte[] { SlaveAddress, (byte)FunctionCode, 0x00, 0x00 };
-                ushort multiply = 1;
+                byte[] bytes = new byte[] { SlaveAddress, (byte)FunctionCode };
+                ushort multiply;
                 if (GetByteMode(ReadStartAddress) == ByteMode.FourBytes)
                 {
                     multiply = 2;
+                    // TODO: NumberOfElementsの最大数チェック
+                }
+                else
+                {
+                    multiply = 1;
+                    // TODO: NumberOfElementsの最大数チェック
                 }
                 bytes = bytes.Concat(BitConverter.GetBytes(ReadStartAddress).Reverse()).
-                              Concat(BitConverter.GetBytes(NumberOfElements * multiply).Reverse()).ToArray();
+                              Concat(BitConverter.GetBytes((ushort)(NumberOfElements * multiply)).Reverse()).ToArray();
                 return bytes.Concat(CalculateCRC(bytes)).ToArray();
             }
         }

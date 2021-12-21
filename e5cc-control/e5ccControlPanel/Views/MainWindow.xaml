@@ -1,0 +1,163 @@
+﻿<Window x:Class="e5ccControlPanel.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:view="clr-namespace:e5ccControlPanel.Views"
+        xmlns:vm="clr-namespace:e5ccControlPanel.ViewModels"
+        xmlns:conv="clr-namespace:e5ccControlPanel.Converters"
+        mc:Ignorable="d"
+        Background="#ff181818"
+        Foreground="Orange"
+        FontFamily="HGSMinchoE"
+        UseLayoutRounding="True"
+        Title="DENNNABE-MONITOR" Height="840" Width="1280" ResizeMode="NoResize">
+
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
+
+    <Window.Resources>
+        <conv:StatusBackgroundConverter x:Key="StatusBackgroundConverter" />
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="720" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="AUto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="16">
+            <TextBlock Text="現在温度" FontSize="48" Foreground="Orange" Margin="0,0,0,4" />
+            <TextBlock HorizontalAlignment="Right" Text="{Binding PV, StringFormat={}{0:F1}}"
+                        Foreground="Orange"
+                        FontSize="96"
+                        FontFamily="{StaticResource DSEG7}" RenderTransformOrigin="0.5,0.5" >
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <SkewTransform AngleX="-6"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
+            <TextBlock Text="目標値" FontSize="24" Foreground="Orange" Margin="0,20,0,4" />
+            <TextBlock HorizontalAlignment="Right" Text="{Binding SetPoint, StringFormat={}{0:F1}}"
+                        Foreground="Orange"
+                        FontSize="48"
+                        FontFamily="{StaticResource DSEG7}" RenderTransformOrigin="0.5,0.5" >
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <SkewTransform AngleX="-6"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
+            <TextBlock Text="操作量モニタ(加熱)" FontSize="24" Foreground="Orange" Margin="0,20,0,4" />
+            <TextBlock HorizontalAlignment="Right" Text="{Binding MV_Heating, StringFormat={}{0:F1}}"
+                        Foreground="Orange"
+                        FontSize="48"
+                        FontFamily="{StaticResource DSEG7}" RenderTransformOrigin="0.5,0.5" >
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <SkewTransform AngleX="-6"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
+            <TextBlock Text="所要時間" FontSize="24" Foreground="Orange" Margin="0,8,0,4" />
+            <TextBlock HorizontalAlignment="Right" Text="{Binding TargetTime, StringFormat={}{0:hh\\:mm\\:ss}}"
+                        Foreground="Orange"
+                        FontSize="48"
+                        FontFamily="{StaticResource DSEG7}" RenderTransformOrigin="0.5,0.5" >
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <SkewTransform AngleX="-6"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
+            <TextBlock Text="経過時間" FontSize="24" Foreground="Orange" Margin="0,8,0,4" />
+            <TextBlock HorizontalAlignment="Right" Text="{Binding ElapsedTime, StringFormat={}{0:hh\\:mm\\:ss}}"
+                        Foreground="Orange"
+                        FontSize="48"
+                        FontFamily="{StaticResource DSEG7}" RenderTransformOrigin="0.5,0.5" >
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <SkewTransform AngleX="-6"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
+            <TextBlock Text="残時間" FontSize="24" Foreground="Orange" Margin="0,8,0,4" />
+            <TextBlock HorizontalAlignment="Right" Text="{Binding RemainTime, StringFormat={}{0:hh\\:mm\\:ss}}"
+                        Foreground="Orange"
+                        FontSize="48"
+                        FontFamily="{StaticResource DSEG7}" RenderTransformOrigin="0.5,0.5" >
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <SkewTransform AngleX="-6"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+            
+            <Border BorderBrush="Orange" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="16">
+                <Image Source="{Binding ImageSource}" Width="{Binding ImageWidth}" Height="{Binding ImageHeight}" Stretch="None" />
+            </Border>
+
+            <Grid Height="60">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Margin="8" Content="鶏ハム" FontSize="24" Foreground="Orange"
+                        Command="{Binding TorihamuCommand}" CommandParameter="{Binding}" />
+                <Button Margin="8" Grid.Column="1" Content="温玉" FontSize="24" Foreground="Orange"
+                        Command="{Binding OntamaCommand}" CommandParameter="{Binding}" />
+                <Button Margin="8" Grid.Column="2" Content="サーモンのコンフィ" FontSize="20" Foreground="Orange"
+                        Command="{Binding ConfitCommand}" CommandParameter="{Binding}" />
+            </Grid>
+
+            <Grid Height="60">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Margin="8" Content="無制限運転" FontSize="24" Foreground="Orange"
+                        Command="{Binding UnboundCommand}" CommandParameter="{Binding}" />
+            </Grid>
+
+            <Grid Height="60" Margin="0,36,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Margin="8" Grid.Column="1" Content="時間計測開始" FontSize="24" Foreground="Orange"
+                        Command="{Binding StartCommand}" CommandParameter="{Binding}" />
+                <Button Margin="8" Grid.Column="2" Content="時間計測終了" FontSize="24" Foreground="Orange"
+                        Command="{Binding StopCommand}" CommandParameter="{Binding}" />
+            </Grid>
+
+        </StackPanel>
+
+        <WrapPanel Grid.Row="1" Grid.ColumnSpan="2">
+            <TextBlock Text="制御出力(加熱)" FontSize="24" Width="240" TextAlignment="Center" Margin="8" Padding="0,8,0,8" Foreground="Black" Background="{Binding ControlOutput_Heating, Converter={StaticResource StatusBackgroundConverter}}" />
+            <TextBlock Text="警報1" FontSize="24" Width="240" TextAlignment="Center" Margin="8" Padding="0,8,0,8" Foreground="Black" Background="{Binding Alarm1, Converter={StaticResource StatusBackgroundConverter}}" />
+            <TextBlock Text="警報2" FontSize="24" Width="240" TextAlignment="Center" Margin="8" Padding="0,8,0,8" Foreground="Black" Background="{Binding Alarm2, Converter={StaticResource StatusBackgroundConverter}}" />
+            <TextBlock Text="RAMモード" FontSize="24" Width="240" TextAlignment="Center" Margin="8" Padding="0,8,0,8" Foreground="Black" Background="{Binding RamMode, Converter={StaticResource StatusBackgroundConverter}}" />
+            <TextBlock Text="RAM⇔ROM不一致" FontSize="24" Width="240" TextAlignment="Center" Margin="8" Padding="0,8,0,8" Foreground="Black" Background="{Binding NotEqualRamAndVolatileMemory, Converter={StaticResource StatusBackgroundConverter}}" />
+            <TextBlock Text="通信書込許可" FontSize="24" Width="240" TextAlignment="Center" Margin="8" Padding="0,8,0,8" Foreground="Black" Background="{Binding CommunicationWriting, Converter={StaticResource StatusBackgroundConverter}}" />
+        </WrapPanel>
+        
+    </Grid>
+</Window>

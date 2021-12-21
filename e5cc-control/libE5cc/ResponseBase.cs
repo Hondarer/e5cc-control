@@ -6,6 +6,14 @@ namespace libE5cc
 {
     public abstract class ResponseBase : FormatBase
     {
-        public byte[] Bytes { internal set; get; }
+        public CommandBase? Command { get;internal set; }
+
+        protected byte[] _bytes = new byte[0];
+
+        public virtual byte[] Bytes
+        {
+            get => _bytes;
+            internal set => _bytes = value;
+        }
     }
 }

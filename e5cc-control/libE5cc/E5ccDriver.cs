@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO.Ports;
+using System.Threading;
 
 namespace libE5cc
 {
     public class E5ccDriver : IDisposable
     {
-        private SerialPort serialPort;
+        private readonly SerialPort serialPort;
 
         private bool disposedValue;
 
@@ -21,13 +23,52 @@ namespace libE5cc
             };
 
             serialPort.Open();
+            //Thread.Sleep(5000);
+
+            ResponseBase response;
+
+            // 通信書込: 01：ON（許可）
+            response = SendCommand(new OperationCommand() { CommandCode = 0x00, RelatedInformation = 0x01 });
+
+            // 書込モード: 01：RAM 書込モード
+            response = SendCommand(new OperationCommand() { CommandCode = 0x04, RelatedInformation = 0x01 });
+
+            // 設定温度変更
+            response = SendCommand(new WriteVariableSingleCommand() { WriteVariableAddress = 0x2103, WriteData = 5000 });
+
+            // RAMデータ保存
+            //response = SendCommand(new OperationCommand() { CommandCode = 0x05, RelatedInformation = 0x00 });
+
+            foreach (byte data in response.Bytes)
+            {
+                Debug.Write($"0x{data:x2} ");
+            }
+            Debug.Write("\r\n");
         }
 
         public ResponseBase SendCommand(CommandBase commandBase)
         {
-            serialPort.Write(commandBase.Bytes, 0, commandBase.Bytes.Length);
+            int retryCount = 0;
+            while (retryCount < 2)
+            {
+                try
+                {
+                    serialPort.Write(commandBase.Bytes, 0, commandBase.Bytes.Length);
 
-            return ResponseFactory.GetResponse(serialPort, commandBase);
+                    ResponseBase response = ResponseFactory.GetResponse(serialPort, commandBase);
+                    return response;
+                }
+                catch(Exception ex)
+                {
+                    Debug.WriteLine(ex.ToString());
+                    serialPort.DiscardInBuffer();
+                }
+
+                Thread.Sleep(100);
+                retryCount++;
+            }
+
+            throw new Exception();
         }
 
         #region IDisposable

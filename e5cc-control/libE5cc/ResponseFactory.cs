@@ -6,46 +6,82 @@ namespace libE5cc
 {
     public class ResponseFactory
     {
-        public static ResponseBase GetResponse(SerialPort serialPort, CommandBase commandBase)
+        public static ResponseBase GetResponse(SerialPort serialPort, CommandBase command)
         {
-            // TODO: タイムアウトの実装などが本来必要
-            while (serialPort.BytesToRead < 2)
+            int timeout = 0;
+            while (timeout < 3)
             {
+                if (serialPort.BytesToRead >= 2)
+                {
+                    break;
+                }
                 Thread.Sleep(100);
+                timeout++;
+            }
+            if (timeout == 3)
+            {
+                throw new Exception("timeout");
             }
 
             byte[] recvData = new byte[2];
             serialPort.Read(recvData, 0, 2);
 
-            if (recvData[1] == (byte)FunctionCode.WriteVariableMultiple)
+            if (recvData[1] == (byte)FunctionCode.ReadVariableMultiple)
             {
-                // TODO: タイムアウトの実装などが本来必要
-                while (serialPort.BytesToRead < 1)
+                timeout = 0;
+                while (timeout < 3)
                 {
+                    if (serialPort.BytesToRead >= 1)
+                    {
+                        break;
+                    }
                     Thread.Sleep(100);
+                    timeout++;
+                }
+                if (timeout == 3)
+                {
+                    throw new Exception("timeout");
                 }
 
                 Array.Resize(ref recvData, 3);
                 serialPort.Read(recvData, 2, 1);
 
-                // TODO: タイムアウトの実装などが本来必要
-                while (serialPort.BytesToRead < recvData[2])
+                timeout = 0;
+                while (timeout < 3)
                 {
+                    if (serialPort.BytesToRead >= (recvData[2] + 2))
+                    {
+                        break;
+                    }
                     Thread.Sleep(100);
+                    timeout++;
+                }
+                if (timeout == 3)
+                {
+                    throw new Exception("timeout");
                 }
 
                 Array.Resize(ref recvData, recvData.Length + recvData[2] + 2);
-                serialPort.Read(recvData, 2, recvData[2] + 2);
+                serialPort.Read(recvData, 3, recvData[2] + 2);
 
-                return new ReadVariableMultipleResponse() { Bytes = recvData };
+                return new ReadVariableMultipleResponse() { Command = command, Bytes = recvData };
             }
 
             if (recvData[1] == (byte)FunctionCode.WriteVariableSingleOrOperationCommand)
             {
-                // TODO: タイムアウトの実装などが本来必要
-                while (serialPort.BytesToRead < 6)
+                timeout = 0;
+                while (timeout < 3)
                 {
+                    if (serialPort.BytesToRead >= 6)
+                    {
+                        break;
+                    }
                     Thread.Sleep(100);
+                    timeout++;
+                }
+                if (timeout == 3)
+                {
+                    throw new Exception("timeout");
                 }
 
                 Array.Resize(ref recvData, 8);
@@ -62,10 +98,19 @@ namespace libE5cc
 
             if (recvData[1] == (byte)FunctionCode.EchobackTest)
             {
-                // TODO: タイムアウトの実装などが本来必要
-                while (serialPort.BytesToRead < 6)
+                timeout = 0;
+                while (timeout < 3)
                 {
+                    if (serialPort.BytesToRead >= 6)
+                    {
+                        break;
+                    }
                     Thread.Sleep(100);
+                    timeout++;
+                }
+                if (timeout == 3)
+                {
+                    throw new Exception("timeout");
                 }
 
                 Array.Resize(ref recvData, 8);
@@ -74,10 +119,19 @@ namespace libE5cc
                 return new EchobackTestResponse() { Bytes = recvData };
             }
 
-            // TODO: タイムアウトの実装などが本来必要
-            while (serialPort.BytesToRead < 3)
+            timeout = 0;
+            while (timeout < 3)
             {
+                if (serialPort.BytesToRead >= 3)
+                {
+                    break;
+                }
                 Thread.Sleep(100);
+                timeout++;
+            }
+            if (timeout == 3)
+            {
+                throw new Exception("timeout");
             }
 
             Array.Resize(ref recvData, 5);

@@ -11,6 +11,15 @@ namespace libE5cc
         public byte SlaveAddress { get; set; } = 0x01;
 
         public FunctionCode FunctionCode { get; protected set; }
+        protected ByteMode GetByteMode(ushort address)
+        {
+            if (address >= 0x2000)
+            {
+                return ByteMode.TwoBytes;
+            }
+
+            return ByteMode.FourBytes;
+        }
 
         protected byte[] CalculateCRC(byte[] buffer)
         {

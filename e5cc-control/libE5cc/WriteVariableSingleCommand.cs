@@ -18,7 +18,7 @@ namespace libE5cc
         {
             get
             {
-                byte[] bytes = new byte[] { SlaveAddress, (byte)FunctionCode, 0x00, 0x00 };
+                byte[] bytes = new byte[] { SlaveAddress, (byte)FunctionCode };
                 bytes = bytes.Concat(BitConverter.GetBytes(WriteVariableAddress).Reverse()).
                               Concat(BitConverter.GetBytes(WriteData).Reverse()).ToArray();
                 return bytes.Concat(CalculateCRC(bytes)).ToArray();

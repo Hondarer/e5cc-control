@@ -8,7 +8,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Themes\DSEG\DSEG7Classic-BoldItalic.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Themes\DSEG\DSEG7Classic-BoldItalic.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\libE5cc\libE5cc.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Themes\MetroDark\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Infragistics.Themes.MetroDark.Wpf" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

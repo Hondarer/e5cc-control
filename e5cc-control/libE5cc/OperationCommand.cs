@@ -11,7 +11,7 @@
             {
                 _commandCode = value;
                 WriteVariableAddress = 0x0000;
-                WriteData &= 0xff00;
+                WriteData &= 0x00ff;
                 WriteData |= (ushort)(value << 8);
             }
         }
@@ -25,7 +25,7 @@
             {
                 _relatedInformation = value;
                 WriteVariableAddress = 0x0000;
-                WriteData &= 0x00ff;
+                WriteData &= 0xff00;
                 WriteData |= value;
             }
         }
